@@ -48,10 +48,9 @@ public class Story {
     }
 
     public void setPlaceholder(int index, String text) {
-        int startOfType = startLocations.get(index);
         String replaceText = "<" + type.get(index) + ">";
 
-        story.replace(replaceText, text);
+        story = story.replace(replaceText, text);
     }
 
     public int getPlaceholderCount() {
