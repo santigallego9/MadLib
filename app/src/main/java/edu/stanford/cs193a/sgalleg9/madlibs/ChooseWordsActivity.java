@@ -13,7 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ChooseWordsActivity extends AppCompatActivity {
+import stanford.androidlib.SimpleActivity;
+
+public class ChooseWordsActivity extends SimpleActivity {
 
     private String finishedStory;
     private int count = 1, clicks = 1;
@@ -30,7 +32,18 @@ public class ChooseWordsActivity extends AppCompatActivity {
         wordsLeft = (TextView) findViewById(R.id.words_left_text_view);
         type = (TextView) findViewById(R.id.type_text_view);
 
-        Scanner s = new Scanner(getResources().openRawResource(R.raw.madlib_tarzan));
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+        String filename = intent.getStringExtra("filename");
+
+        Scanner s;
+
+        if(type.equals("native")) {
+            s = chooseNativeFile(filename);
+        } else {
+            s = new Scanner(openFileInput(filename));
+        }
+
         story = new Story(s);
 
         setInformation(0);
@@ -91,5 +104,27 @@ public class ChooseWordsActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    public Scanner chooseNativeFile(String filename) {
+        Scanner s;
+
+        switch(filename) {
+            case "Tarzan":
+                s = new Scanner(getResources().openRawResource(R.raw.madlib_tarzan));
+                break;
+            case "Dating":
+                s = new Scanner(getResources().openRawResource(R.raw.madlib_how_to_date));
+                break;
+            case "Holiday":
+                s = new Scanner(getResources().openRawResource(R.raw.madlib_holiday));
+                break;
+            default:
+                toast("ERROR: File not found. Using default file");
+                Log.d("ERROR", "NO NATIVE FILE FOUND, KEY: " + filename);
+                s = new Scanner(getResources().openRawResource(R.raw.madlib_tarzan));
+        }
+
+        return s;
     }
 }

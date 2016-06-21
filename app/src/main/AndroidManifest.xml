@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".ChooseWordsActivity" />
         <activity android:name=".StoryActivity" />
-        <activity android:name=".ChooseStoryActivity"></activity>
+        <activity android:name=".ChooseStoryActivity" />
+        <activity android:name=".AddStoryActivity"></activity>
     </application>
 
 </manifest>
