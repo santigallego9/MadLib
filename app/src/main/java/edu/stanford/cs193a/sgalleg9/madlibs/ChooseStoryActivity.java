@@ -119,6 +119,6 @@ public class ChooseStoryActivity extends SimpleActivity {
     }
 
     public void addButtonClick(View view) {
-        toast("CLICKED");
+        Intent intent = new Intent(this, AddStoryActivity.class);
     }
 }
