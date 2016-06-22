@@ -27,7 +27,10 @@ public class Story {
 
     public void read(Scanner s) {
 
-        rawStory = s.nextLine();
+        do {
+            rawStory += s.nextLine() + "\n";
+        } while(s.hasNextLine());
+
         story = rawStory;
     }
 

@@ -120,5 +120,21 @@ public class ChooseStoryActivity extends SimpleActivity {
 
     public void addButtonClick(View view) {
         Intent intent = new Intent(this, AddStoryActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ListView list = find(R.id.stories_list);
+        list.setOnItemClickListener(this);
+
+        availableStories = new ArrayList<>();
+        stories = new HashMap<>();
+
+        loadStories();
+
+        SimpleList.with(this).setItems(findListView(R.id.stories_list), availableStories);
     }
 }
