@@ -2,4 +2,6 @@
     <string name="app_name">MadLibs</string>
     <string name="title_activity_choose_story">Choose Story</string>
     <string name="action_settings">Settings</string>
+    <string name="add_story_message">Please keep in mind that input fields must be written between &lt;&gt;. For example, &lt;adjective&gt; or &lt;verb&gt; or &lt;person&gt;</string>
+    <string name="add_story_hint">Once upon a time there was a/an &lt;animal&gt; who lived in the woods of &lt;place&gt;.....</string>
 </resources>

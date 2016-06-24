@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="10dp"
-            android:text="Please keep in mind that input fields must be written between &lt;&gt;. For example, &lt;adjective&gt; or &lt;verb&gt; or &lt;person&gt;"/>
+            android:text="@string/add_story_message"
+            android:id="@+id/add_story_text_view"/>
 
         </LinearLayout>
 
@@ -58,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="top|start"
-            android:hint="Once upon a time there was a/an &lt;animal&gt; who lived in the woods of &lt;place&gt;....."/>
+            android:inputType="textCapSentences|textMultiLine"
+            android:hint="@string/add_story_hint"/>
 
     </LinearLayout>
 

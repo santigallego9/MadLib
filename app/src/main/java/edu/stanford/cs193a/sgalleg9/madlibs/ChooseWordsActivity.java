@@ -36,6 +36,8 @@ public class ChooseWordsActivity extends SimpleActivity {
         String type = intent.getStringExtra("type");
         String filename = intent.getStringExtra("filename");
 
+        Log.d("FILENAMES", "Type: " + type + " Filename: " + filename);
+
         Scanner s;
 
         if(type.equals("native")) {

@@ -2,6 +2,7 @@ package edu.stanford.cs193a.sgalleg9.madlibs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,23 +22,13 @@ public class ChooseStoryActivity extends SimpleActivity {
 
 
     private ArrayList<String> availableStories;
-    private HashMap<Integer, String> stories;
+    private ArrayList<String> filenames;
     private int endOfNativeStories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_story);
-
-        ListView list = find(R.id.stories_list);
-        list.setOnItemClickListener(this);
-
-        availableStories = new ArrayList<>();
-        stories = new HashMap<>();
-
-        loadStories();
-
-        SimpleList.with(this).setItems(findListView(R.id.stories_list), availableStories);
     }
 
     @Override
@@ -63,12 +54,12 @@ public class ChooseStoryActivity extends SimpleActivity {
             } else {
                 type = "user";
 
-                intent.putExtra("filename", stories.get(index));
+                intent.putExtra("filename", filenames.get(index));
             }
         } else {
             type = "user";
 
-            intent.putExtra("filename", stories.get(index));
+            intent.putExtra("filename", filenames.get(index));
         }
 
         intent.putExtra("type", type);
@@ -81,16 +72,11 @@ public class ChooseStoryActivity extends SimpleActivity {
         Scanner s = new Scanner(getResources().openRawResource(R.raw.stories));
 
         do {
-            ArrayList<String> storyInfo = new ArrayList<>();
-            int counter = 0;
-
             String name = s.next();
             String filename = s.next();
 
             availableStories.add(name);
-            stories.put(counter, filename);
-
-            counter++;
+            filenames.add(filename);
         } while(s.hasNextLine());
 
         endOfNativeStories = availableStories.size();
@@ -100,16 +86,14 @@ public class ChooseStoryActivity extends SimpleActivity {
             Scanner u = new Scanner(openFileInput("user_stories.txt"));
 
             do {
-                ArrayList<String> storyInfo = new ArrayList<>();
-                int counter = endOfNativeStories;
-
                 String name = u.next();
                 String filename = u.next();
 
-                availableStories.add(name);
-                stories.put(counter, filename);
+                name = name.replaceAll("_", " ");
 
-                counter++;
+                availableStories.add(name);
+                filenames.add(filename);
+
             } while(u.hasNextLine());
         } catch(Exception e) {
             log("Failed to find user input file");
@@ -131,7 +115,7 @@ public class ChooseStoryActivity extends SimpleActivity {
         list.setOnItemClickListener(this);
 
         availableStories = new ArrayList<>();
-        stories = new HashMap<>();
+        filenames = new ArrayList<>();
 
         loadStories();
 
